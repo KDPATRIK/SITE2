@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>С 8 марта!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ffe6e6, #ffb3b3);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+            text-align: center;
+            animation: fadeIn 2s, float 6s ease-in-out infinite;
+            z-index: 1;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        h1::after {
+            content: '❤';
+            position: absolute;
+            font-size: 0.5em;
+            top: -10px;
+            right: -20px;
+            animation: heartBeat 1.5s infinite;
+        }
+
+        .message {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.2em;
+        }
+
+        .message p {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .message p:hover {
+            background: rgba(255, 107, 107, 0.1);
+            transform: scale(1.02);
+        }
+
+        .floating-photo {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .floating-photo:hover {
+            transform: scale(1.2) rotate(5deg) !important;
+            z-index: 100;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(var(--moveX), var(--moveY)) rotate(var(--rotation));
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>С 8 марта!</h1>
+        <div class="message">
+            <p class="greeting">Настенька, поздравляю тебя с 8 мартом❤✨</p>
+            <p class="wish">Поздравляю тебя с Международным женским днём! 🌸</p>
+            <p class="dream">Пусть у тебя всё будет зашибись, счастье льется рекой, успех преследует по пятам, а настроение всегда будет на высоте! 💖 </p>
+            <p class="dream"> Пусть каждый день приносит радость, улыбки и приятные сюрпризы! ✨</p>
+            <p class="hope">Если честно, ты мне уже стала как сестра, и я очень рад, что у меня есть такой человек, как ты. Спасибо за всё! 🤗💙 </p>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем блестящие эффекты
+        function createSparkles() {
+            const card = document.querySelector('.card');
+            for(let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                card.appendChild(sparkle);
+            }
+        }
+
+        createSparkles();
+        
+        // Остальной код для фотографий остается прежним
+        function createFloatingPhoto(index) {
+            const photo = document.createElement('img');
+            photo.src = `${index}.jpg`;
+            photo.className = 'floating-photo';
+            
+            photo.style.left = Math.random() * window.innerWidth + 'px';
+            photo.style.top = Math.random() * window.innerHeight + 'px';
+            
+            const moveX = (Math.random() - 0.5) * 300;
+            const moveY = (Math.random() - 0.5) * 300;
+            const rotation = Math.random() * 360;
+            const duration = 5 + Math.random() * 5;
+            
+            photo.style.setProperty('--moveX', moveX + 'px');
+            photo.style.setProperty('--moveY', moveY + 'px');
+            photo.style.setProperty('--rotation', rotation + 'deg');
+            photo.style.animation = `float ${duration}s infinite alternate ease-in-out`;
+            
+            document.body.appendChild(photo);
+        }
+
+        for (let i = 1; i <= 10; i++) {
+            createFloatingPhoto(i);
+        }
+
+        setInterval(() => {
+            const photos = document.querySelectorAll('.floating-photo');
+            photos.forEach(photo => {
+                const rect = photo.getBoundingClientRect();
+                if (rect.right < 0 || rect.left > window.innerWidth || 
+                    rect.bottom < 0 || rect.top > window.innerHeight) {
+                    photo.remove();
+                    createFloatingPhoto(Math.floor(Math.random() * 10) + 1);
+                }
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
